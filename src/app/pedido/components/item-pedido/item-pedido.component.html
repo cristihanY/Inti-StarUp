@@ -1,0 +1,23 @@
+<div class="pedido">
+    <div class="pedido-header">
+        <section class="header-modalidad">
+            <span>{{purchs.clienteId}}</span>
+        </section>
+        
+        <section class="header-info-compra">
+            <h4>Nº de Compra: {{purchs.purchaseId}}</h4>
+            <p> Compra efectuado el: {{purchs.date| slice:0:10 }}</p>
+            <p>Costo total: PEN {{purchs.state| currency}}</p>
+        </section>
+        <span class="order-item-header-line"></span>
+        <section class="detalle-pedido">
+            <a href="#">{{purchs.comment}}</a>
+            <svg viewBox="0 0 1024 1024" ><path d="M318.698667 97.6a35.925333 35.925333 0 0 1 49.813333-4.128l1.632 1.408 371.914667 355.232a85.333333 85.333333 0 0 1 0.032 123.381333L370.133333 929.12a35.936 35.936 0 0 1-51.445333-2.730667 37.674667 37.674667 0 0 1 1.130667-50.944l1.546666-1.504L685.653333 527.253333a21.333333 21.333333 0 0 0 0-30.922666L321.365333 150.058667a37.653333 37.653333 0 0 1-2.666666-52.448z"></path></svg>
+
+        </section>
+    </div>
+    <div class="pedido-body">
+        <app-pedidounitario *ngFor="let item of purchs.items" [item]="item"></app-pedidounitario>
+    </div>
+
+</div>

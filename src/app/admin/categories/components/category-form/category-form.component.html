@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="save()" >
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Categoría</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field >
+            <mat-label>Nombre</mat-label>
+            <input
+              placeholder="Nombre"
+              formControlName="category"
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">
+        <span *ngIf="isNew">Crear categoría</span>
+        <span *ngIf="!isNew">Editar categoría</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>

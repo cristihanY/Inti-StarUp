@@ -1,0 +1,110 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+
+  <div class="figure-general-login">
+    <img class="img-logo" src="../../../../assets/svg/intilogo.svg" alt="">
+  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title style="margin-left: 130px;">Registro</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input placeholder="Nombre" formControlName="name" matInput type="email">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Apellido</mat-label>
+            <input placeholder="Apellido" formControlName="lastName" matInput type="email">
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input placeholder="email" formControlName="email" matInput type="email">
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input placeholder="password" formControlName="password" matInput type="password" *ngIf="!showPassword">
+            <input type="text" formControlName="password" matInput name="password1" [value]="password" *ngIf="showPassword">
+            
+            
+            
+            <div *ngIf="form.get('password').touched && form.get('password').invalid">
+
+                <mat-error *ngIf="form.get('password').hasError('invalid_password')">
+                  debe tener un numero en la contraceña
+                </mat-error>
+            </div>
+            <mat-icon  (click)="togglePassword()" matSuffix *ngIf="!showPassword">visibility</mat-icon>
+            <mat-icon (click)="togglePassword()" matSuffix *ngIf="showPassword">visibility_off</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input placeholder="password" formControlName="confirmPassword" matInput type="password" *ngIf="!showPassword1">
+            <input type="text" matInput formControlName="confirmPassword" name="password2" [value]="password1" *ngIf="showPassword1">
+            <div *ngIf="form.get('confirmPassword').touched && form.errors">
+              <mat-error *ngIf="form.hasError('match_password')">
+                La contraceña debe ser igual
+              </mat-error>
+            </div>
+            <mat-icon (click)="togglePassword1()" matSuffix *ngIf="!showPassword1">visibility</mat-icon>
+            <mat-icon (click)="togglePassword1()"  matSuffix *ngIf="showPassword1">visibility_off</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+            <mat-radio-group formControlName="rolClient" arial-label="Select an option">
+              <mat-radio-button style="margin-right: 10px;" value="client">Cliente</mat-radio-button>
+              <mat-radio-button value="user">Usuario</mat-radio-button>
+            </mat-radio-group>
+        </div>
+      </div>
+
+      <div *ngIf="form.get('rolClient').value==='user'" class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Clave de empresa</mat-label>
+            <input placeholder="Clave" formControlName="companyName" matInput type="text">
+          </mat-form-field>
+        </div>
+        <div *ngIf="form.get('companyName').value!='inti'">
+
+          <mat-error *ngIf="form.get('companyName').value!='inti'">
+            No coincide con la clave de la empresa
+          </mat-error>
+      </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="imprimir()" [disabled]="form.invalid" mat-raised-button type="submit">Registro</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>
+

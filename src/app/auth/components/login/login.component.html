@@ -1,0 +1,50 @@
+
+
+
+
+<form [formGroup]="form" (ngSubmit)="login($event)">
+  <div class="figure-general-login">
+    <img class="img-logo" src="../../../../assets/svg/intilogo.svg" alt="">
+  </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Inicia sesión</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-label>E-mail</mat-label>
+              <input placeholder="email" formControlName="email" matInput type="text">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-label>Contraceña</mat-label>
+              
+              <input placeholder="password" formControlName="password" matInput type="password" *ngIf="!showPassword">
+              <input type="text" formControlName="password" matInput name="password1" [value]="password" *ngIf="showPassword">
+              <mat-icon style="cursor:pointer" (click)="togglePassword()" matSuffix *ngIf="!showPassword">visibility</mat-icon>
+              <mat-icon style="cursor:pointer"  (click)="togglePassword()" matSuffix *ngIf="showPassword">visibility_off</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [disabled]="form.invalid" mat-raised-button type="submit">Iniciar sesión</button>
+
+      </mat-card-actions>
+
+
+    </mat-card>
+    <div class="cuestions-grid">
+      <span routerLink="/auth/register" >Crear una cuenta</span>
+      <span >¿Olvidó su contraceña?</span>
+    </div>
+    <span style="color: rgb(255, 0, 0);" *ngIf="errorMessage!=''">
+      {{errorMessage}}
+    </span>
+  </form>
+ 

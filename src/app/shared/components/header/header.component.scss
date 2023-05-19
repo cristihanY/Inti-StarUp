@@ -1,0 +1,63 @@
+nav > a {
+  padding: 5px;
+  text-decoration: none;
+}
+nav > a.active {
+ color: rgb(252, 164, 0);
+ box-shadow: 1px .01px .03px rgb(255, 183, 0);
+ border-radius: 0px;
+}
+.header-row{
+  width: 100%;
+}
+.header-toolbar {
+  margin-bottom: 20px;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);;
+  box-shadow: 1px 1px 1px rgba(119, 119, 119, 0.268);
+}
+
+.div-nav-initial{
+  display: flex;
+  justify-content: space-between;
+  
+
+}
+
+.correo_login{
+  padding-right: 30px; 
+  padding-top: 2px;
+  margin-right: 1.5%;
+  border-radius: 0%;
+  box-shadow: 1px .05px .1px rgb(0, 0, 0);
+  cursor: pointer;
+}
+.profile-user{
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+
+}
+
+.buton-carrito{
+  padding-right: 30px; 
+  padding-top: 2px;
+  border-radius: 0%;
+  box-shadow:none;
+}
+
+.buton-carrito:hover{
+  color:#ff3000;
+  box-shadow: 1px 1px .1px rgb(255, 162, 0);
+}
+
+.correo_login:hover{
+  color: rgb(252, 164, 0);
+  box-shadow: 1px 1px .1px rgb(255, 162, 0);
+}
+
+.mat-menu-model{
+  width: 100%;
+}
+
+//row between-xs middle-xs header-row

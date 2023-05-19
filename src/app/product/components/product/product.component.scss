@@ -1,0 +1,29 @@
+// :host {
+//   margin: 2px;
+//   border: 1px solid black;
+//   border-radius: 5px;
+//   display: block;
+// }
+.crop-image{
+  height: 250px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  img {
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+.btnVenta{
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: rgb(245, 202, 93);
+}

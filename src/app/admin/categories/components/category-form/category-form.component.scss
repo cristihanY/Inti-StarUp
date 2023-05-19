@@ -1,0 +1,27 @@
+mat-card{
+    margin: 12px;
+}
+img{
+            width: 200px;
+            
+    }
+
+#imputFile{
+    background-color:  red;
+}
+
+.boton-archivo {
+    display: flex;
+    padding: 5px 5px;
+    background-color: #6f91f7;
+    color: white;
+    cursor: pointer;
+    width: 198px;
+    border-radius: 5px;
+  }
+
+  .boton-archivo  p{
+    margin: 4px;
+    color: black;
+    font-size: 16px;
+}

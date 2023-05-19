@@ -1,0 +1,108 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="general">
+        <div class="consepto-producto">
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <input placeholder="Nombre" formControlName="name" matInput type="text">
+              
+                <mat-error *ngIf="nameField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="nameField.hasError('minlength')">
+                  Minimo debe tener 3 caracters
+                </mat-error>
+    
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <input placeholder="Precio" formControlName="price" matInput type="number">
+                <mat-error *ngIf="priceField.hasError('required')">Este campo es requerido</mat-error>
+                <mat-error *ngIf="priceField.hasError('price_invalid')">no te debes pasar de 10000</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <input placeholder="Stock" formControlName="stock" matInput type="number">
+                <mat-error *ngIf="priceField.hasError('required')">Este campo es requerido</mat-error>
+                <mat-error *ngIf="priceField.hasError('price_invalid')">no te debes pasar de 10000</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          
+    
+          <div class="row">
+              <div class="col-xs">
+              <mat-form-field >
+                <input style="width: 100%;" placeholder="Estado" formControlName="active" matInput type="text" >
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="categoryId">
+                    <mat-option [value]="category.categoryId" *ngFor="let category of categories">{{category.category}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="categoryIdFiel.hasError('required')">Este campo es requerido</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <textarea placeholder="Descripción" formControlName="descriptionProduct" matInput></textarea>
+                <mat-error *ngIf="descriptionField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="descriptionField.hasError('minlength')">
+                  Minimo debe tener 10 caracters
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <input placeholder="Link del imagen" formControlName="productImg" matInput type="text" value="">
+    
+              </mat-form-field>    
+            </div>
+          </div>
+        </div>
+
+        <div class="imagen">
+          <figure style="height: 150px; width: 300px;">
+            <img src="{{productImg.value}}" alt="no imge" width="100%">
+
+          </figure>
+        </div>
+
+
+      </div>
+     
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
+    </mat-card-actions>
+  </mat-card>
+  
+</form>

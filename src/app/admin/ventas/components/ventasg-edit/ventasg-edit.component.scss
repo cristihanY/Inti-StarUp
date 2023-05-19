@@ -1,0 +1,55 @@
+:host{
+    width: 96%;
+    margin: 2%;
+    display: block;
+  }
+  table {
+    width: 100%;
+    img {
+      width: 150px;
+    }
+    margin-bottom: 5px;
+  }
+
+  .detalles-venta{
+    margin-bottom: 10px;
+    background-color: rgb(23, 108, 255);
+    box-shadow: 0 10px 10px -10px #000000;
+    color: white;
+    display: flex;
+  }
+
+  .detalles-venta section{
+  margin-top: 9px;
+  margin-right: 50px;
+  margin-left: 5px;
+  }
+
+  .muestra-user{
+    box-shadow: 0 10px 10px -10px #000000;
+    background-color: rgb(222, 222, 222);
+    margin-bottom: 10px;
+  }
+
+  .muestra-user section{
+
+    margin: 5px;
+
+  }
+
+  .info-venta{
+    display: flex;
+    display: grid;
+    grid-template-rows: 70px 230px;
+    grid-auto-columns: 100% ;
+    grid-auto-flow: column;
+    gap: 5px
+
+  }
+
+  .productos p{
+    text-align: center;
+    color: rgb(148, 132, 106);
+    font-size: 22px;
+    margin: 5px;
+  }

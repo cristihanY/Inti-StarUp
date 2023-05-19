@@ -1,0 +1,33 @@
+.detalles_producto{
+    display: flex;
+    height: 350px;
+}
+
+.img-producto{
+    width: 300px;
+    height: 260px;
+}
+
+.add-carrito{
+   
+        width: 100%;
+        border-radius: 5px;
+        margin-top: 16px;
+        background: linear-gradient(90deg,#ff640e,#ff3000);
+        color: #fff;
+        border-width: 0;
+        padding-top: 10px;
+          padding-bottom: 10px;
+        
+      
+}
+
+.lista-detalle ul{
+    padding: 0px;
+    list-style-type: none;
+}
+
+.lista-detalle ul li{
+margin-bottom: 2px;
+}
+

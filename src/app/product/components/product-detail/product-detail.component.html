@@ -1,0 +1,20 @@
+<div *ngIf="product" class="detalles_producto">
+  <div class="img-producto">
+    <img [src]="product.productImg" alt="">
+  </div>
+  <div class="lista-detalle">
+    <ul>
+      <li>Nombre: {{ product.name }}</li>
+      <li>Precio: {{ product.price | currency }}</li>
+      <li>Categoria: {{ product.category.category}}</li>
+      <li>Descripción: {{ product.descriptionProduct }}.</li>
+      <li>Cantidad disponible: {{product.stock}} unidades.</li>
+    </ul>
+    <button routerLink="/order" (click)="addCart()" class="add-carrito">Comprar</button>
+  </div>
+  
+ <!-- <button (click)="createProduct()">crear</button>
+  <button (click)="updateProduct()">update</button>
+  <button (click)="deleteProduct()">delete</button>-->
+</div>
+

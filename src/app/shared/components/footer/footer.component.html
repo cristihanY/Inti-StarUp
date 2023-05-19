@@ -1,0 +1,61 @@
+<footer>
+  <div class="container">
+    <div class="row" >
+
+      <div class="">
+        <div class="box">
+          <img style="height: 200px; width: 160px;" src="../../../../assets/svg/intilogo.svg" alt="logo">
+        </div>
+      </div>
+      <div class="">
+        <div class="box" >
+          <h3>Productos</h3>
+          <ul>
+            <li>
+              <a routerLink="/products" [queryParams]="{ type: 'news' }"
+                >Nuevos Productos</a
+              >
+            </li>
+            <li>
+              <a routerLink="/products" [queryParams]="{ type: 'offer' }"
+                >En oferta</a
+              >
+            </li>
+            <li>
+              <a routerLink="/products" [queryParams]="{ type: 'latest' }"
+                >Lo que buscas</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="">
+        <div class="box">
+          <h3>Acerca de Inti</h3>
+          <ul>
+            <li><a routerLink="/about-us">Sobre nosotros</a></li>
+            <li><a routerLink="/home">Nuestras tiendas</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    <div class="item-foother">
+        <div class="box">
+          <h3>Contacto</h3>
+          <ul>
+            <li><a routerLink="/home"><i class="fa fa-whatsapp" aria-hidden="true">WhatsApp</i></a></li>
+            <li><a routerLink="/home"><i class="fa fa-facebook" aria-hidden="true">Facebook</i></a></li>
+            <li><a routerLink="/">Atencion al cliente: +51972395078</a></li>
+          
+          </ul>
+        <!--<mat-form-field>
+            <input matInput placeholder="Digite su correo" [formControl]="emailField" type="email" color="white">
+          </mat-form-field>
+          <button mat-raised-button [disabled]="emailField.invalid" (click)="sendMail()">enviar</button>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="copyring-dev"><p> © Copyright 2023 |INTI PERÚ SAC |  @cvy</p></div>
+</footer>

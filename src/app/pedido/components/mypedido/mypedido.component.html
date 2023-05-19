@@ -1,0 +1,10 @@
+<div *ngIf="purchase1==[]" class="mi-pedit">
+    <h1 style="text-align:center ; color: rgb(199, 171, 131);">Aun no tienes pedidos</h1>
+</div>
+
+
+
+<div class="pedidos-muestra" >
+    <h1 style="text-align:center ; color: rgb(199, 171, 131);">Mis compras</h1>
+    <app-item-pedido *ngFor="let purchs of purchase1" [purchs]="purchs"></app-item-pedido>
+</div>

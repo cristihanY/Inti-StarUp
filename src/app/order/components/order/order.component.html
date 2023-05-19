@@ -1,0 +1,408 @@
+<mat-horizontal-stepper>
+  
+
+    <mat-step >
+      <ng-template matStepLabel>Cesta de la compra</ng-template>
+        
+          <div class="section-car">
+            <table mat-table [dataSource]="productCarito$" class="mat-elevation-z8">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let product">{{ product.name }}</td>
+              </ng-container>
+      
+              <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef>Imagen</th>
+                <td mat-cell *matCellDef="let product">
+                  <img
+                    [src]="product.productImg"
+                    alt="product"
+                    style="height: 70px"
+                  />
+                </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Precio U</th>
+                <td mat-cell *matCellDef="let product">{{ product.price }}</td>
+              </ng-container>
+      
+              <ng-container matColumnDef="cantidad">
+                <th mat-header-cell *matHeaderCellDef>cantidad</th>
+      
+                <td mat-cell *matCellDef="let product">
+                  <div class="comet-input-number">
+                    <div class="comet-input-number-btn">
+                      <span (click)="decrementoCntidad(product.productId)" class="comet-icon comet-icon-subtract"
+                        ><svg
+                          viewBox="0 0 1024 1024"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="false"
+                          focusable="false"
+                      >
+                    <path d="M864 480a32 32 0 0 1 3.072 63.850667l-3.072 0.149333h-704a32 32 0 0 1-3.072-63.850667L160 480h704z"></path></svg></span>
+                    </div>
+                    <input type="text" class="comet-input-number-input" value="{{product.quantity}}"/>
+                    <div class="comet-input-number-btn">
+                      <span (click)="incrementoCantidad(product.productId)"  class="comet-icon comet-icon-add"
+                        ><svg
+                          viewBox="0 0 1024 1024"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="false"
+                          focusable="false"
+                        >
+                          <path
+                            d="M512 128a32 32 0 0 1 31.850667 28.928l0.149333 3.072v320h320a32 32 0 0 1 3.072 63.850667l-3.072 0.149333h-320v320a32 32 0 0 1-63.850667 3.072L480 864v-320h-320a32 32 0 0 1-3.072-63.850667L160 480h320v-320A32 32 0 0 1 512 128z"
+                          ></path></svg></span>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef>stock</th>
+                <td mat-cell *matCellDef="let product">{{ product.stock }}</td>
+              </ng-container>
+      
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Opciones</th>
+                <td mat-cell *matCellDef="let product">
+                  <a class="a-quitar" (click)="deleteProduct(product.productId)"
+                    ><mat-icon>delete_forever</mat-icon></a
+                  >
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <div class="cart-summary">
+              <div class="cart-summary-title">Resumen</div>
+      
+              <div class="cart-summary-list">
+                <div class="cart-summary-item">
+                  <div class="cart-summary-item-label">Subtotal</div>
+                  <div class="cart-summary-item-content">
+                    <span
+                      style="
+                        padding: 0px 2px;
+                        font-size: 14px;
+                        color: rgb(51, 51, 51);
+                      "
+                      >PEN {{ subtotal | currency }}</span
+                    >
+                  </div>
+                </div>
+                <div class="cart-summary-item">
+                  <div class="cart-summary-item-label">Gastos de envío</div>
+                  <div class="cart-summary-item-content">
+                    <span
+                      style="
+                        padding: 0px 2px;
+                        font-size: 14px;
+                        color: rgb(51, 51, 51);
+                      "
+                      >PEN {{ gastosEnvio | currency }}</span
+                    >
+                  </div>
+                </div>
+                <div class="cart-summary-item">
+                  <div class="cart-summary-item-label">Total a pagar</div>
+                  <div class="cart-summary-item-content">
+                    <span
+                      style="
+                        padding: 0px 2px;
+                        font-size: 15px;
+                        color: rgb(51, 51, 51);
+                      "
+                      >PEN {{ total | currency }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+      
+              <button *ngIf="token!=null&& subtotal!=0" type="button" class="cart-summary-button" matStepperNext>
+                <span>Realizar el pedido</span>
+              </button>
+              <button (click)="mensajeSug()" *ngIf="token!=null&& subtotal==0" type="button" class="cart-summary-button" >
+                <span>Realizar el pedido</span>
+              </button>
+              <button *ngIf="token==null"  (click)="digirAlogin()"  type="button" class="cart-summary-button">
+                <span>Realizar el pedido</span>
+              </button>
+            </div>
+      
+            <!-- <ng-template matStepLabel>Sus productos</ng-template>
+            <div *ngIf="products$ | async as products">
+              <p *ngIf="products.length === 0">no hay productos</p>
+              <div class="row" *ngFor="let itemV of itemVenta">
+                <div class="col-xs-12 col-sm-2 col-md-2">
+                  <div class="box">
+                    <img class="image" [src]="" alt="nopaso" />
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                  <div class="box">
+                    {{ itemV.quantity }}
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                  <div class="box">
+                    {{ itemV.total }}
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+        
+            
+                  <ng-template matStepLabel>Sus productos</ng-template>
+            <div *ngIf="products$ | async as products">
+              <p *ngIf="products.length === 0">no hay productos</p>
+              <div class="row" *ngFor="let product of products">
+                <div class="col-xs-12 col-sm-2 col-md-2">
+                  <div class="box">
+                    <img class="image" [src]="product.productImg" alt="" />
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                  <div class="box">
+                    {{ product.name }}
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-5">
+                  <div class="box">
+                    {{ product.price }}
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            -->
+          </div>
+
+
+    </mat-step>
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Datos personales</ng-template>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <mat-card>
+        <mat-card-content>
+          <div class="content">
+
+            <h1 class="logo">Añadir nueva <span>Dirección</span></h1>
+    
+            <div class="contact-wrapper animated bounceInUp">
+                <div class="contact-form">
+                    <h3>Verifique sus datos personales</h3>
+                    <div class="formsd">
+
+                          <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                            
+                            <mat-label >Nombre</mat-label>
+                            <input *ngIf="profile==null" matInput>
+                            <input *ngIf="profile!=null"  formControlName="name" matInput value="{{profile.name}}">
+                          </mat-form-field>
+
+
+          
+                          <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                            <mat-label>Apellidos</mat-label>
+                            <input *ngIf="profile==null" matInput>
+                            <input *ngIf="profile!=null" formControlName="lastName"  matInput value="{{profile.lastName}}">
+                          </mat-form-field>
+
+               
+
+                          <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                            <mat-label>Email</mat-label>
+                            <input *ngIf="profile==null" matInput>
+                            <input *ngIf="profile!=null" formControlName="email" type="email" matInput  value="{{profile.email}}"
+                                   placeholder="Ejp. perico@example.com">
+                          </mat-form-field>
+                    
+
+                     
+                          <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                            <mat-label>Número de telefono</mat-label>
+                            <span matPrefix>+51 &nbsp;</span>
+                            <input *ngIf="profile==null" matInput>
+                            <input *ngIf="profile!=null" formControlName="numberPhone" type="tel" matInput placeholder="987654321" value="{{profile.numberPhone}}">
+                            <mat-icon matSuffix>mode_edit</mat-icon>
+                          </mat-form-field>
+              
+                          <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                            <mat-label>Dirección</mat-label>
+                            
+                            <textarea *ngIf="profile==null" matInput></textarea>
+                            <textarea *ngIf="profile!=null" formControlName="address" matInput value="{{profile.address}}"></textarea>
+                          </mat-form-field>
+                      
+
+                         <th></th>
+                           <mat-form-field class="ml-20">
+                              <mat-label>Ciudad</mat-label>
+                              <input *ngIf="profile==null" matInput placeholder="Ejp. Ayacucho" >
+                              <input *ngIf="profile!=null" formControlName="city" matInput placeholder="Ejp. Ayacucho" value="{{profile.city}}">
+                            </mat-form-field>
+
+                           <mat-form-field class="ml-20">
+                              <mat-label>Distrito</mat-label>
+                              <input *ngIf="profile==null" matInput placeholder="Ejp. San juan" >
+                              <input *ngIf="profile!=null" formControlName="district" matInput placeholder="Ejp. San juan" value="{{profile.district}}">
+                            </mat-form-field>
+
+                            <mat-form-field class="ml-20">
+                              <mat-label>Codigo postal</mat-label>
+                              <input *ngIf="profile==null"  matInput placeholder="Ejp. 5001" >
+                              <input *ngIf="profile!=null" formControlName="postalCod" matInput   placeholder="Ejp. 5001" value="{{profile.postalCod}}" >
+                              
+                            </mat-form-field>
+                         
+                      
+                        <p class="block">
+                            <button [disabled]="form.invalid" (click)="aupdateDattos()">
+                                confirmar
+                            </button>
+
+
+                            <button (click)="redireccionar()"  type="button">
+                              cancelar
+                          </button>
+                        </p>
+
+                    </div>
+
+                
+                </div>
+                <div class="cart-summary">
+
+                  <div class="cart-summary-title">Resumen</div>
+          
+                  <div class="cart-summary-list">
+                    <div class="cart-summary-item">
+                      <div class="cart-summary-item-label">Subtotal</div>
+                      <div class="cart-summary-item-content">
+                        <span
+                          style="
+                            padding: 0px 2px;
+                            font-size: 14px;
+                            color: rgb(51, 51, 51);
+                          "
+                          >PEN {{ subtotal | currency }}</span
+                        >
+                      </div>
+                    </div>
+                    <div class="cart-summary-item">
+                      <div class="cart-summary-item-label">Gastos de envío</div>
+                      <div class="cart-summary-item-content">
+                        <span
+                          style="
+                            padding: 0px 2px;
+                            font-size: 14px;
+                            color: rgb(51, 51, 51);
+                          "
+                          >PEN {{ gastosEnvio | currency }}</span
+                        >
+                      </div>
+                    </div>
+                    <div class="cart-summary-item">
+                      <div class="cart-summary-item-label">Total a pagar</div>
+                      <div class="cart-summary-item-content">
+                        <span
+                          style="
+                            padding: 0px 2px;
+                            font-size: 15px;
+                            color: rgb(51, 51, 51);
+                          "
+                          >PEN {{ total | currency }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+          
+                  <button [disabled]="form.invalid"  matStepperNext type="button" class="cart-summary-button">
+                    <span  >Pagar</span>
+                  </button>
+                  <mat-error *ngIf="form.invalid==true">
+                    Valida tus datos antes de seguir
+                  </mat-error>
+                </div>
+            </div>
+    
+        </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Pago</ng-template>
+
+    
+    
+
+    <div class="content">
+      <h1 class="logo">Añadir nueva <span>Tarjeta</span></h1>
+      <!-- Formulario -->
+      <div class="contact-wrapper animated bounceInUp">
+        <div class="contact-form">
+            <h3>Registrar tarjeta</h3>
+            <div class="formsd">
+
+
+                  <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                    <mat-label>Numero de la targeta</mat-label>
+                    <input matInput>
+                  </mat-form-field>
+
+
+  
+                  <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                    <mat-label>Nombre del titular de la tarjeta</mat-label>
+                    <input matInput>
+                  </mat-form-field>
+
+       
+
+                  <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                    <mat-label>MES</mat-label>
+                    <input type="email" matInput 
+                           placeholder="Ejp. Enero">
+                  </mat-form-field>
+            
+                  <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                    <mat-label>AÑO</mat-label>
+                    <input type="email" matInput 
+                           placeholder="Ejp. 2010">
+                    
+                  </mat-form-field>
+
+                  <mat-form-field class="ml-20" appearance="standard" fxFlex="33%" fxFlex.xs="100%">
+                    <mat-label>CVV</mat-label>
+                    <input type="email" matInput 
+                           placeholder="Ejp. 123">
+                  </mat-form-field>
+              
+                <p class="block">
+                    <button (click)="enviarft()">
+                        Guardar y confirmar
+                    </button>
+                </p>
+            </div>
+
+        
+        </div>
+
+    </div>
+    </div>
+
+  </mat-step>
+</mat-horizontal-stepper>

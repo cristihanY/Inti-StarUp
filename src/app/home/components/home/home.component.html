@@ -1,0 +1,26 @@
+<div class="fondo-home">
+    <app-banner></app-banner>
+    <div class="productos_home">
+        <div class="informacion-general">
+            <h1>Productos orgánicos a precios increibles</h1>
+        </div>
+        <hr>
+        <div class="product-grid">
+
+            <div *ngFor="let product of products" >
+
+                <mat-card class="enviar-detalle" [routerLink]="['/products', product.productId]">
+
+                    <div class="crop-image">
+                      <img [src]="product.productImg" alt="">
+                    </div>
+                    <mat-card-header>
+                        <mat-card-title>{{ product.name | uppercase }}</mat-card-title>
+                        <mat-card-subtitle style="margin-bottom: 0%;">{{ product.price | currency }}</mat-card-subtitle>
+                      </mat-card-header>
+                  </mat-card>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>

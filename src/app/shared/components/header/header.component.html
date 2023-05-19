@@ -1,0 +1,51 @@
+<mat-toolbar class="header-toolbar" >
+  <mat-toolbar-row>
+    <div class="container">
+      <div class="div-nav-initial">
+        <nav>
+
+          <a mat-button routerLink="/home"  >
+            <img width="50px" src="../../../../assets/svg/intilogo.svg" alt="">
+          </a>
+          <a mat-button routerLink="/home" routerLinkActive="active">Inicio</a>
+          <a mat-button routerLink="/products" routerLinkActive="active"
+            >Productos</a
+          >
+          <a mat-button routerLink="/contact" routerLinkActive="active"
+          >Sobre inti</a
+        >
+          
+        </nav>
+        <div class="profile-user">
+
+          <a *ngIf="profile==null" class="correo_login" mat-raised-button [matMenuTriggerFor]="menu" routerLinkActive="active"
+          ><mat-icon class="icono-avatar">person</mat-icon> Mi cuenta</a>
+          <mat-menu class="mat-menu-model" #menu="matMenu">
+            <button mat-menu-item routerLink="/auth/login">Iniciar sesión</button>
+            <button mat-menu-item routerLink="/auth/register">Registrate</button>
+          </mat-menu>
+
+
+          <a *ngIf="profile!=null" class="correo_login" mat-raised-button [matMenuTriggerFor]="menu1"  routerLinkActive="active"
+          > <mat-icon class="icono-avatar">person</mat-icon> Hola, {{profile.name}}</a>
+
+          <mat-menu class="mat-menu-model" #menu1="matMenu">
+            <button mat-menu-item routerLink="/home">Mi intiStore</button>
+            <button mat-menu-item routerLink="/mypedido">Mis pedidos</button>
+            <button *ngIf="profile!=null&&profile.rolClient=='admin' " mat-menu-item routerLink="/admin">Administrador</button>
+            <button (click)="terminarSeseion()" mat-menu-item routerLink="/home">Cerrar sesión</button>
+          </mat-menu>
+
+
+          <a class="buton-carrito"  routerLink="/order" mat-raised-button [matBadge]="total$ | async" matBadgeColor="warn">
+            <mat-icon class="icono-carrito">shopping_cart</mat-icon>
+            Cesta
+          </a>
+
+        </div>
+
+        
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
